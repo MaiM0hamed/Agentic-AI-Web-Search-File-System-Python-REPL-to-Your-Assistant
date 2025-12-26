@@ -1,81 +1,104 @@
-# Agentic-AI-Web-Search-File-System-Python-REPL-to-Your-Assistant
-Sidekick Agent – Experimental AI Coworker
+🧠 Sidekick Agent – Experimental AI Coworker
 
-Sidekick is an experimental AI agent application designed to act as a powerful coworker.
-It is capable of searching the web, navigating pages, reading and writing files, executing Python code, sending notifications, and retrieving knowledge from Wikipedia using a tool-augmented agent architecture.
+An experimental AI sidekick application that acts as a powerful coworker capable of searching the web, browsing pages, reading and writing files, executing Python code, sending notifications, and retrieving knowledge from Wikipedia — all through an agent-based architecture.
 
-This project is intended as a flexible foundation rather than a finished product.
+⚠️ Important: This project is experimental and intentionally powerful. Use with caution.
 
-Project Overview
+🚀 Project Overview
 
-The Sidekick application is built using LangChain, LangGraph, and Gradio.
-It demonstrates how an AI agent can be equipped with multiple tools and allowed to reason about when and how to use them to complete real tasks.
+Sidekick is an AI-powered assistant built using LangChain, LangGraph, and Gradio.
+It is designed as a canvas, not a finished product — a flexible foundation that you can customize, extend, and experiment with.
 
-The system is designed as a canvas that can be extended, modified, and customized based on user needs.
+The agent operates with multiple tools and can autonomously decide when and how to use them to achieve user goals.
 
-Key Capabilities
+✨ Key Features
 
-Web search using SerpAPI
+🔍 Web Search using SerpAPI
 
-Browser automation using Playwright (Chromium)
+🌐 Browser Automation via Playwright (Chromium)
 
-File system read/write access within a restricted sandbox directory
+📂 File System Access (sandboxed directory only)
 
-Wikipedia knowledge retrieval through the public Wikipedia API
+🧠 Wikipedia Knowledge Retrieval
 
-Python code execution through a Python REPL tool
+🐍 Python Code Execution (unsandboxed – use carefully)
 
-Push notifications using the Pushover API
+🔔 Push Notifications using Pushover
 
-Agent workflow based on a worker–evaluator architecture
+🧩 Agent Graph Architecture with Worker & Evaluator roles
 
-Interactive user interface built with Gradio
+🖥️ Interactive UI built with Gradio
 
-Project Structure
+🏗️ Project Structure
 sidekick/
 │
-├── sidekick_tools.py   # Definition and setup of all tools
-├── sidekick.py         # Core agent logic, state definition, and graph construction
-├── app.py              # Gradio application and user interface
-└── .env                # Environment variables and API keys
+├── sidekick_tools.py   # All tool definitions (search, browser, files, python, etc.)
+├── sidekick.py         # Core agent logic, state, graph, worker & evaluator
+├── app.py              # Gradio UI and app entry point
+└── .env                # API keys and environment variables
 
-Tools Module (sidekick_tools.py)
+🛠️ Tools Included
+1. Web Search Tool
 
-This module centralizes all tools used by the agent.
+Uses SerpAPI for fast and reliable web search
 
-Included tools:
+Returns structured search results for the agent
 
-Web Search Tool
-Uses SerpAPI to perform internet searches and return structured results.
+2. Browser Tool
 
-Browser Tool
-Uses Playwright to control a Chromium browser for automated navigation.
-The browser has no access to stored cookies, passwords, or authentication data.
+Uses Playwright (Chromium) for automated web navigation
 
-File Management Tool
-Based on the LangChain File Management Toolkit.
-Access is restricted to a predefined sandbox directory to prevent unrestricted file system access.
+No access to cookies, saved passwords, or authentication data
 
-Wikipedia Tool
-Uses Wikipedia’s public API to retrieve encyclopedic information.
+3. File Management Tool
 
-Python Execution Tool
-Allows the agent to execute Python code directly on the host machine.
-This tool is not sandboxed and should be removed if there are security concerns.
+Based on LangChain File Management Toolkit
 
-Push Notification Tool
-Sends notifications using the Pushover API.
+Restricted to a specific sandbox/ directory
 
-All tools are collected into a single list and automatically made available to the agent.
+Allows reading and writing files safely
 
-Core Agent Module (sidekick.py)
+4. Wikipedia Tool
 
-This module contains the main Sidekick class and agent logic.
+Uses Wikipedia’s public API
 
-Key components:
+Enables factual lookups and background research
 
-State Definition
-A typed state object that tracks:
+5. Python REPL Tool ⚠️
+
+Allows the agent to execute arbitrary Python code
+
+Not sandboxed
+
+Can be removed if you’re not comfortable with this level of access
+
+6. Push Notification Tool
+
+Sends notifications via Pushover
+
+Useful for alerts, task completion, or monitoring long operations
+
+🧠 Agent Architecture
+
+The system is built using a graph-based agent workflow:
+
+Worker Agent
+
+Executes tasks
+
+Uses tools
+
+Produces outputs
+
+Evaluator Agent
+
+Assesses whether success criteria are met
+
+Determines if user input is required
+
+Provides structured feedback
+
+The agent state includes:
 
 Message history
 
@@ -83,64 +106,53 @@ Success criteria
 
 Evaluation feedback
 
-Flags indicating whether user input is required
+Flags for user input
 
-Worker Agent
-Responsible for task execution and tool usage.
+⚠️ Safety & Usage Notes
 
-Evaluator Agent
-Uses structured output to assess whether success criteria are met and whether additional user input is needed.
+This agent has real capabilities and real access
 
-Agent Graph
-Built using LangGraph to define the flow between worker execution and evaluation steps.
+Python execution is not isolated
 
-Because some tools require asynchronous initialization (such as Playwright), the agent setup is split between the constructor and an asynchronous setup method.
+Browser automation is powerful but controlled
 
-User Interface (app.py)
+File access is sandboxed, but still real
 
-The user interface is built using Gradio.
-It manages user input, displays agent responses, and connects the frontend to the Sidekick agent backend.
+👉 If you are unsure:
 
-Safety and Usage Notes
+Remove the Python tool
 
-This application provides the agent with significant capabilities.
+Remove browser tools
 
-Python execution is not isolated or sandboxed
+Start with limited capabilities
 
-Browser automation can navigate real websites
+You are responsible for how this agent is used.
 
-File system access is restricted but still real
+🎨 Philosophy
 
-If you are not comfortable with these capabilities:
+This project is not a polished product — it’s a starting point.
 
-Remove the Python execution tool
+Experiment with prompts
 
-Remove browser automation tools
+Add or remove tools
 
-Limit the available tool set
+Customize agent behavior
 
-The user is responsible for monitoring and controlling agent behavior.
+Iterate until it fits your workflow
 
-Design Philosophy
+Think of it as your own personal AI coworker, built and controlled by you.
 
-Sidekick is intentionally experimental.
+🔮 Future Extensions
 
-Prompts are expected to be refined over time
+Add calendar integration
 
-Tools can be added or removed as needed
+Connect to external APIs
 
-Behavior may require iteration and tuning
+Integrate MCP-based tools
 
-The project is designed to encourage experimentation and exploration rather than provide a fully locked-down product.
+Improve safety guardrails
 
-Future Improvements
+Refactor agent modules
 
-Additional tool integrations (calendar, external APIs)
+Add logging & monitoring
 
-Improved safety guardrails
-
-Refactoring and modularization of agent logic
-
-Enhanced monitoring and logging
-
-Integration with MCP-based tooling
